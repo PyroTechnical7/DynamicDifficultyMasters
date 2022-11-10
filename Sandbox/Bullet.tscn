@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://nutkka0kla8s"]
+
+[sub_resource type="GDScript" id="GDScript_noa5l"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+
+
+
+func _physics_process(delta):
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = up_direction
+	velocity = direction * SPEED
+
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ouo0b"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = SubResource("GDScript_noa5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_ouo0b")
+
+[node name="Polygon2D" type="Polygon2D" parent="CharacterBody2D"]
+scale = Vector2(11, 11)
+polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)
