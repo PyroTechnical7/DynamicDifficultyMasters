@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5bvk4uuu04vo"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_a4x7s"]
+[ext_resource type="Script" path="res://EnemyBulletHitbox.gd" id="2_r672y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4a2c"]
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_a4x7s")
+
+[node name="BulletHitbox" type="Area2D" parent="."]
+script = ExtResource("2_r672y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHitbox"]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_u4a2c")
+
+[node name="BulletShape" type="Polygon2D" parent="."]
+scale = Vector2(15, 15)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)

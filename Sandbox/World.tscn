@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://pcgmonu7gsy2"]
+
+[ext_resource type="PackedScene" uid="uid://du8bon0weaock" path="res://Player.tscn" id="1_nup7d"]
+[ext_resource type="PackedScene" uid="uid://b4rbcl2jwumbu" path="res://std_enemy.tscn" id="2_5w8l8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_nup7d")]
+position = Vector2(500, 350)
+
+[node name="LevelBorders" type="Node2D" parent="."]
+scale = Vector2(1.66724, 1.66724)
+
+[node name="StdEnemy" parent="." instance=ExtResource("2_5w8l8")]
+position = Vector2(749, 1042)
+rotation = 3.14159
+
+[node name="StdEnemy2" parent="." instance=ExtResource("2_5w8l8")]
+position = Vector2(1282, 1042)
+rotation = 3.14159
+
+[node name="StdEnemy3" parent="." instance=ExtResource("2_5w8l8")]
+position = Vector2(1023, 32)
+
+[node name="StdEnemy4" parent="." instance=ExtResource("2_5w8l8")]
+position = Vector2(1603, 32)

@@ -42,6 +42,8 @@ func rotate_about_point():
 
 func _physics_process(delta):
 	get_input()
+	if(get_slide_collision_count() > 0 ):
+		get_parent().queue_free()
 	
 
 	
