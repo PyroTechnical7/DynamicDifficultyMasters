@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4rbcl2jwumbu"]
+
+[ext_resource type="Script" path="res://EnemyBulletSpawner.gd" id="1_2y3cb"]
+[ext_resource type="Script" path="res://std_enemy.gd" id="1_ttrs3"]
+
+[node name="StdEnemy" type="Area2D"]
+script = ExtResource("1_ttrs3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-30, -30)
+polygon = PackedVector2Array(0, 0, 30, 63, 60, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-30, -30)
+color = Color(0.635294, 0, 0, 1)
+polygon = PackedVector2Array(60, 0, 30, 64, 0, 0)
+
+[node name="EnemyBulletSpawner" type="Node2D" parent="."]
+position = Vector2(0, 45)
+rotation = 3.14159
+script = ExtResource("1_2y3cb")
+
+[node name="Timer" type="Timer" parent="EnemyBulletSpawner"]
+autostart = true
+
+[connection signal="timeout" from="EnemyBulletSpawner/Timer" to="EnemyBulletSpawner" method="_on_timer_timeout"]
