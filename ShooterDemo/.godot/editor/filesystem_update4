@@ -1,0 +1,5 @@
+res://Assets/Characters/Player/BulletSpawner.gd
+res://FriendlyBullet.gd
+res://Assets/Scenes/player.tscn
+res://Assets/Scenes/world.tscn
+res://Assets/Scenes/FriendlyBullet.tscn
