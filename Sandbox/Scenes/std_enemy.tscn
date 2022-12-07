@@ -5,19 +5,28 @@ script/source = "extends Area2D
 var bullet_scene = load(\"res://Scenes/FriendlyBullet.tscn\") 
 @export
 var interval = 1
+signal destroyed
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
-	timer.wait_time = interval
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
+	timer.wait_time = interval
+	
 	if(has_overlapping_areas()):
 		queue_free()
+		emit_signal(\"destroyed\")
+		
 			
+
+
+func _on_std_enemy_destroyed():
+	interval = 1 # Replace with function body.
 "
 
 [sub_resource type="GDScript" id="GDScript_6bnhl"]

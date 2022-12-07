@@ -77,3 +77,5 @@ rotation = -1.57079
 [node name="Polygon2D" type="Polygon2D" parent="."]
 modulate = Color(1, 0.85098, 0, 0.839216)
 polygon = PackedVector2Array(1299, 152, 1299, 216, 1372, 216, 1372, 151)
+
+[connection signal="destroyed" from="StdEnemy" to="StdEnemy4" method="_on_std_enemy_destroyed"]
