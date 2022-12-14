@@ -19,3 +19,5 @@ shape = SubResource("RectangleShape2D_u4a2c")
 scale = Vector2(15, 15)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)
+
+[connection signal="body_entered" from="BulletHitbox" to="." method="_on_bullet_hitbox_body_entered"]

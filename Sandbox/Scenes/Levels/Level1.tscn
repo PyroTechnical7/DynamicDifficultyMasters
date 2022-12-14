@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://lfct5834hip0"]
+
+[ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_1q5nh"]
+[ext_resource type="PackedScene" uid="uid://cqtiv7k47dwny" path="res://Scenes/std_enemy.tscn" id="2_qo33u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jt26"]
+size = Vector2(20, 210)
+
+[node name="Level1" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(990, 540)
+
+[node name="Player" parent="." instance=ExtResource("1_1q5nh")]
+position = Vector2(193, 962)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(375, 765)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(2.06881, 2.99152)
+shape = SubResource("RectangleShape2D_7jt26")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(678, 315)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+scale = Vector2(2.06881, 2.99152)
+shape = SubResource("RectangleShape2D_7jt26")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
+
+[node name="StdEnemy" parent="." instance=ExtResource("2_qo33u")]
+position = Vector2(617, 466)
+rotation = 1.5708
+interval = 2
+
+[node name="StdEnemy2" parent="." instance=ExtResource("2_qo33u")]
+position = Vector2(740, 704)
+rotation = -1.57079
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(678, 526)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+scale = Vector2(2.06881, 2.99152)
+shape = SubResource("RectangleShape2D_7jt26")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D5"]
+polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(760, 815)
+rotation = -1.57079
+scale = Vector2(0.811367, 0.320375)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+scale = Vector2(2.06881, 2.99152)
+shape = SubResource("RectangleShape2D_7jt26")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D6"]
+polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
+
+[node name="StdEnemy4" parent="." instance=ExtResource("2_qo33u")]
+position = Vector2(741, 540)
+rotation = -1.57079
+interval = 2
+
+[node name="StdEnemy5" parent="." instance=ExtResource("2_qo33u")]
+position = Vector2(740, 385)
+rotation = -1.57079
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 0.85098, 0, 0.839216)
+polygon = PackedVector2Array(1299, 152, 1299, 216, 1372, 216, 1372, 151)
+
+[connection signal="destroyed" from="StdEnemy" to="StdEnemy4" method="_on_std_enemy_destroyed"]

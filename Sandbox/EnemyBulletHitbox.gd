@@ -8,5 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(has_overlapping_bodies()):
-		get_parent().queue_free()
+	pass

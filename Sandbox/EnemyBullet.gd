@@ -1,6 +1,5 @@
-extends Node2D
-@export
-var SPEED = 7
+extends Node
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += Vector2(SPEED,0).rotated(rotation)
-	
-func test():
 	pass
