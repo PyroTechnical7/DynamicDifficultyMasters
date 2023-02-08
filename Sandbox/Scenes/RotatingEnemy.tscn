@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3m0sb0nc0hxm"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Enemies/RotatingEnemy.gd" id="1_d0mhb"]
+
+[sub_resource type="GDScript" id="GDScript_6bnhl"]
+script/source = "extends Node2D
+var bullet_scene = load(\"res://Scenes/EnemyBullet.tscn\") 
+var shooter
+var timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	shooter = get_parent()
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+	
+
+
+func _on_timer_timeout():
+	var bullet_instance = bullet_scene.instantiate()
+	shooter.get_parent().add_child(bullet_instance)
+	bullet_instance.global_position = global_position
+	bullet_instance.global_rotation = global_rotation - PI/2
+	print(\"timeout\") # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4ufp"]
+
+[node name="StdEnemy" type="Area2D"]
+script = ExtResource("1_d0mhb")
+
+[node name="EnemyBulletSpawner2" type="Node2D" parent="."]
+position = Vector2(-35, 35)
+rotation = 3.92699
+script = SubResource("GDScript_6bnhl")
+
+[node name="Timer" type="Timer" parent="EnemyBulletSpawner2"]
+autostart = true
+
+[node name="EnemyBulletSpawner" type="Node2D" parent="."]
+position = Vector2(35, 35)
+rotation = 2.35619
+script = SubResource("GDScript_6bnhl")
+
+[node name="Timer" type="Timer" parent="EnemyBulletSpawner"]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_n4ufp")
+
+[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="EnemyBulletSpawner3" type="Node2D" parent="."]
+position = Vector2(35, -35)
+rotation = 0.785398
+script = SubResource("GDScript_6bnhl")
+
+[node name="Timer" type="Timer" parent="EnemyBulletSpawner3"]
+autostart = true
+
+[node name="EnemyBulletSpawner4" type="Node2D" parent="."]
+position = Vector2(-35, -35)
+rotation = -0.785398
+script = SubResource("GDScript_6bnhl")
+
+[node name="Timer" type="Timer" parent="EnemyBulletSpawner4"]
+autostart = true
+
+[connection signal="timeout" from="EnemyBulletSpawner2/Timer" to="EnemyBulletSpawner2" method="_on_timer_timeout"]
+[connection signal="timeout" from="EnemyBulletSpawner/Timer" to="EnemyBulletSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="EnemyBulletSpawner3/Timer" to="EnemyBulletSpawner3" method="_on_timer_timeout"]
+[connection signal="timeout" from="EnemyBulletSpawner4/Timer" to="EnemyBulletSpawner4" method="_on_timer_timeout"]
