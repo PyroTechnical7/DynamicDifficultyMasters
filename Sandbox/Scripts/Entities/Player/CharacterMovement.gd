@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 500.0
 var rotation_point
 var angle = 0
+var rotating = false
 
 
 func get_input():
@@ -11,42 +12,37 @@ func get_input():
 	rotation = rotation + PI/2
 	
 	
-	var x_direction = Input.get_axis("ui_left", "ui_right")
-	if x_direction:
-		velocity.x= x_direction * SPEED
-		
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-	var y_direction = Input.get_axis("ui_up", "ui_down")
-	if y_direction:
-		velocity.y = y_direction * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-	velocity = velocity.normalized() * SPEED
+	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = input_direction * SPEED
 	
 	if Input.is_action_just_pressed("ui_select"):
 		rotation_point = get_global_mouse_position()
-		
-	else:
-		move_and_slide()
+		angle = rotation_point.angle_to_point(global_position)
+		rotating = true
+	
+	if Input.is_action_just_released("ui_select"):
+		rotating = false
+	
 	
 
 
 func _physics_process(delta):
 	get_input()
-#	if(get_slide_collision_count() > 0 ):
-#		get_parent().queue_free()
-	if Input.is_action_pressed("ui_select"):
+
+	if (rotating):
 		var radius = global_position.distance_to(rotation_point)
-		var rotation_speed = 100
-		angle += rotation_speed * delta
+		var rotation_speed = 5
+		angle += -rotation_speed * delta
 		
 		var offset = Vector2(sin(angle), cos(angle)) * radius
 		var pos = rotation_point + offset
 		
+		pos = pos - global_position
+		
 		move_and_collide(pos)
+	
+	else :
+		move_and_slide()
 		
 	
 
