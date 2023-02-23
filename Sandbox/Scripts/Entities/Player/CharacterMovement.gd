@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 500.0
 var rotation_point
+var angle = 0
 
 
 func get_input():
@@ -28,22 +29,25 @@ func get_input():
 	if Input.is_action_just_pressed("ui_select"):
 		rotation_point = get_global_mouse_position()
 		
-	if Input.is_action_pressed("ui_select"):
-		rotate_about_point()
 	else:
 		move_and_slide()
 	
-func rotate_about_point():
-	#global_position = rotation_point + (global_position - rotation_point).rotated(PI*SPEED/global_position.distance_to(rotation_point))
-	var angle = SPEED/global_position.distance_to(rotation_point)
-	global_position = rotation_point + (global_position - rotation_point).rotated(angle/32)
-	velocity -= velocity
 
 
 func _physics_process(delta):
 	get_input()
 #	if(get_slide_collision_count() > 0 ):
 #		get_parent().queue_free()
+	if Input.is_action_pressed("ui_select"):
+		var radius = global_position.distance_to(rotation_point)
+		var rotation_speed = 100
+		angle += rotation_speed * delta
+		
+		var offset = Vector2(sin(angle), cos(angle)) * radius
+		var pos = rotation_point + offset
+		
+		move_and_collide(pos)
+		
 	
 
 	
