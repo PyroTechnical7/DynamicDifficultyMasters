@@ -39,7 +39,7 @@ func _physics_process(delta):
 		
 		pos = pos - global_position
 		
-		move_and_collide(pos)
+		if (move_and_collide(pos)): rotating = false
 	
 	else :
 		move_and_slide()
