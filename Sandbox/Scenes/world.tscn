@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://chhmlgggnjs3e"]
+[gd_scene load_steps=5 format=3 uid="uid://chhmlgggnjs3e"]
 
 [ext_resource type="PackedScene" uid="uid://lfct5834hip0" path="res://Scenes/Levels/Level1.tscn" id="1_qcqlv"]
 [ext_resource type="PackedScene" uid="uid://ckkakycrswh1k" path="res://Scenes/Levels/borders.tscn" id="2_5dvmm"]
-[ext_resource type="PackedScene" uid="uid://b3m0sb0nc0hxm" path="res://Scenes/RotatingEnemy.tscn" id="3_w36na"]
+[ext_resource type="PackedScene" uid="uid://bol2wij4d0wr" path="res://Scenes/Levels/level_2.tscn" id="3_ek2i0"]
+[ext_resource type="Script" path="res://Scenes/DifficultyHandler.gd" id="4_iyurm"]
 
 [node name="World" type="Node2D"]
 
 [node name="Level1" parent="." instance=ExtResource("1_qcqlv")]
+visible = false
 
 [node name="Borders" parent="." instance=ExtResource("2_5dvmm")]
 
-[node name="StdEnemy" parent="." instance=ExtResource("3_w36na")]
-position = Vector2(1497, 940)
+[node name="Level2" parent="." instance=ExtResource("3_ek2i0")]
+
+[node name="DifficultyHandler" type="Node2D" parent="."]
+script = ExtResource("4_iyurm")

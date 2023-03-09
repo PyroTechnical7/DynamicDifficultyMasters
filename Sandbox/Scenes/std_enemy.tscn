@@ -6,12 +6,13 @@ var bullet_scene = load(\"res://Scenes/FriendlyBullet.tscn\")
 @export
 var interval = 1
 signal destroyed
+var DifficultyHandler
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	DifficultyHandler = get_node(\"DifficultyHandler\")
+	#DifficultyHandler.lowerSpeed.connect(setSpeedLow)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,6 +24,8 @@ func _process(delta):
 		emit_signal(\"destroyed\")
 		
 			
+func setSpeedLow():
+	get_node(\"EnemyBulletSpawner\").SPEED = 2
 
 
 func _on_std_enemy_destroyed():
