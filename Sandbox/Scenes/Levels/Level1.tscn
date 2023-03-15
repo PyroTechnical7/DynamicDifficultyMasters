@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://lfct5834hip0"]
+[gd_scene load_steps=6 format=3 uid="uid://drba1fp51nka4"]
 
 [ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_1q5nh"]
 [ext_resource type="PackedScene" uid="uid://cqtiv7k47dwny" path="res://Scenes/std_enemy.tscn" id="2_qo33u"]
-[ext_resource type="Script" path="res://Scenes/Levels/GoalHitbox.gd" id="3_gel6q"]
+[ext_resource type="Script" path="res://Scripts/Entities/Objectives/GoalHitbox.gd" id="3_gel6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jt26"]
 size = Vector2(20, 210)

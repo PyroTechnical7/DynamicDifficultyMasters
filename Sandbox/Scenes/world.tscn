@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://chhmlgggnjs3e"]
+[gd_scene load_steps=4 format=3 uid="uid://gd06chrts7qi"]
 
 [ext_resource type="PackedScene" uid="uid://ckkakycrswh1k" path="res://Scenes/Levels/borders.tscn" id="2_5dvmm"]
-[ext_resource type="PackedScene" uid="uid://bol2wij4d0wr" path="res://Scenes/Levels/level2.tscn" id="3_p1yfm"]
-[ext_resource type="Script" path="res://Scenes/DifficultyHandler.gd" id="4_iyurm"]
+[ext_resource type="PackedScene" uid="uid://drba1fp51nka4" path="res://Scenes/Levels/Level1.tscn" id="3_vw5to"]
+[ext_resource type="Script" path="res://Scripts/Entities/DifficultyHandler.gd" id="4_iyurm"]
 
 [node name="World" type="Node2D"]
 
@@ -11,5 +11,4 @@
 [node name="DifficultyHandler" type="Node2D" parent="."]
 script = ExtResource("4_iyurm")
 
-[node name="Level2" parent="." instance=ExtResource("3_p1yfm")]
-position = Vector2(433.559, 118.078)
+[node name="Level1" parent="." instance=ExtResource("3_vw5to")]

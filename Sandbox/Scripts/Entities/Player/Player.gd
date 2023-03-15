@@ -1,9 +1,4 @@
-extends Area2D
-var bullet_scene = load("res://Scenes/FriendlyBullet.tscn") 
-@export
-var ROTATION_SPEED = 2
-@export
-var player_bullet : Node2D
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-		
-	rotation += ROTATION_SPEED * delta
+	pass
 
-func friendly_shot():
-	queue_free()
+func enemy_shot():
+	pass

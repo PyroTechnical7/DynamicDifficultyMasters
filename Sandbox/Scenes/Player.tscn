@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://geipsrlf8pp"]
+[gd_scene load_steps=5 format=3 uid="uid://geipsrlf8pp"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/CharacterMovement.gd" id="1_6jimt"]
+[ext_resource type="Script" path="res://Scripts/Entities/Player/Player.gd" id="1_hr5qu"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/BulletSpawner.gd" id="3_m2g3p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hix0q"]
 
 [node name="Player" type="Node2D"]
 position = Vector2(484, 321)
+script = ExtResource("1_hr5qu")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 scale = Vector2(10, 10)

@@ -44,6 +44,4 @@ func _physics_process(delta):
 	else :
 		move_and_slide()
 		
-	
 
-	
