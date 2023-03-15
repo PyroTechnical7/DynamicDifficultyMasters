@@ -16,8 +16,8 @@ func get_input():
 	velocity = input_direction * SPEED
 	
 	if Input.is_action_just_pressed("ui_select"):
-		rotation_point = get_global_mouse_position()
-		angle = rotation_point.angle_to_point(global_position)
+		rotation_point = get_global_mouse_position() 
+		angle = rotation_point.angle_to_point(global_position) + 0.5*PI
 		rotating = true
 	
 	if Input.is_action_just_released("ui_select"):
@@ -31,10 +31,10 @@ func _physics_process(delta):
 
 	if (rotating):
 		var radius = global_position.distance_to(rotation_point)
-		var rotation_speed = 5
+		var rotation_speed =   5
 		angle += -rotation_speed * delta
 		
-		var offset = Vector2(sin(angle), cos(angle)) * radius
+		var offset = Vector2(sin(angle), -cos(angle)) * radius
 		var pos = rotation_point + offset
 		
 		pos = pos - global_position
