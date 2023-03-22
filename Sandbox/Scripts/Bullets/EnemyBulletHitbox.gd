@@ -9,4 +9,4 @@ func _ready():
 func _process(delta):
 	if(has_overlapping_areas()):
 		var bodies = get_overlapping_bodies()
-		pass
+		

@@ -4,6 +4,7 @@ var bullet_scene = load("res://Scenes/FriendlyBullet.tscn")
 var ROTATION_SPEED = 2
 @export
 var player_bullet : Node2D
+var collidable = false
 
 
 # Called when the node enters the scene tree for the first time.

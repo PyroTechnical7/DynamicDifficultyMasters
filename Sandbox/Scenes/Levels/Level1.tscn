@@ -91,5 +91,3 @@ position = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_j7qg0")
 script = ExtResource("3_gel6q")
 player = NodePath("../../../Player")
-
-[connection signal="destroyed" from="StdEnemy" to="StdEnemy4" method="_on_std_enemy_destroyed"]

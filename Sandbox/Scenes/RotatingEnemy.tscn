@@ -24,7 +24,7 @@ func _process(delta):
 
 func _on_timer_timeout():
 	var bullet_instance = bullet_scene.instantiate()
-	shooter.get_parent().add_child(bullet_instance)
+	get_tree().root.add_child(bullet_instance)
 	bullet_instance.global_position = global_position
 	bullet_instance.global_rotation = global_rotation - PI/2
 "
@@ -65,7 +65,7 @@ color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.4
 autostart = true
 
 [connection signal="timeout" from="Timer" to="EnemyBulletSpawner2" method="_on_timer_timeout"]

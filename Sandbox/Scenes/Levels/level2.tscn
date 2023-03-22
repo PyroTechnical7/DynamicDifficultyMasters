@@ -6,9 +6,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_r3osx"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 480, 250, 0, 0, 0, 0, 1500, 250, 0, 0, 0, 0, 1500, 900, 0, 0, 0, 0, 480, 900, 0, 0, 0, 0, 480, 250)
+"points": PackedVector2Array(0, 0, 0, 0, 480, 250, 0, 0, 0, 0, 1250.67, 250.725, 0, 0, 0, 0, 1500, 250, 0, 0, 0, 0, 1500, 900, 0, 0, 0, 0, 480, 900, 0, 0, 0, 0, 480, 250)
 }
-point_count = 5
+point_count = 6
 
 [sub_resource type="GDScript" id="GDScript_yxmoi"]
 script/source = "extends Path2D
@@ -32,6 +32,8 @@ func _process(delta):
 position = Vector2(960, 540)
 
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-400, -260)
+scale = Vector2(1.4, 1.4)
 curve = SubResource("Curve2D_r3osx")
 script = SubResource("GDScript_yxmoi")
 
@@ -44,12 +46,10 @@ script = ExtResource("2_jejem")
 player_bullet = NodePath("../../../Player")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1499.01, 249.699)
+position = Vector2(1499.04, 249.635)
 progress = 1018.7
 rotates = false
 script = ExtResource("2_jejem")
-
-[node name="StdEnemy" parent="Path2D/PathFollow2D2" instance=ExtResource("3_8f1p8")]
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
 position = Vector2(1500, 900)
@@ -66,5 +66,3 @@ rotation = 3.14159
 progress = 2688.7
 rotates = false
 script = ExtResource("2_jejem")
-
-[node name="StdEnemy" parent="Path2D/PathFollow2D4" instance=ExtResource("3_8f1p8")]
