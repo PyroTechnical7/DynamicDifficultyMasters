@@ -46,6 +46,7 @@ interval = 2
 [node name="StdEnemy2" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(740, 704)
 rotation = -1.57079
+interval = 1
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(678, 526)
@@ -77,6 +78,7 @@ interval = 2
 [node name="StdEnemy5" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(740, 385)
 rotation = -1.57079
+interval = 1
 
 [node name="Goal" type="Polygon2D" parent="."]
 modulate = Color(1, 0.85098, 0, 0.839216)
