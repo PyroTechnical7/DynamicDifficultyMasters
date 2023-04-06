@@ -1,34 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci55j7tkkouoe"]
+[gd_scene load_steps=7 format=3 uid="uid://ci55j7tkkouoe"]
 
 [ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_6ul38"]
 [ext_resource type="Script" path="res://Scenes/Levels/MinibossPivot.gd" id="2_chbd2"]
 [ext_resource type="PackedScene" uid="uid://b3m0sb0nc0hxm" path="res://Scenes/RotatingEnemy.tscn" id="2_k1c5k"]
+[ext_resource type="Script" path="res://Scenes/Levels/BossPathFollow.gd" id="2_oow5f"]
 [ext_resource type="PackedScene" uid="uid://cqtiv7k47dwny" path="res://Scenes/std_enemy.tscn" id="3_egb2m"]
+
+[sub_resource type="Curve2D" id="Curve2D_jw6nf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1300, 540, 0, 0, 0, 0, 1380, 700, 0, 0, 0, 0, 1460, 540, 0, 0, 0, 0, 1380, 390, 0, 0, 0, 0, 1300, 540)
+}
+point_count = 5
 
 [node name="level3" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_6ul38")]
 position = Vector2(156, 534)
 
-[node name="Miniboss" type="Node2D" parent="."]
-position = Vector2(1319, 532)
+[node name="BossPath" type="Path2D" parent="."]
+position = Vector2(17, -7)
+curve = SubResource("Curve2D_jw6nf")
 
-[node name="MinibossPivot" type="Node2D" parent="Miniboss"]
+[node name="BossPathFollow" type="PathFollow2D" parent="BossPath"]
+position = Vector2(1300, 540)
+rotation = 1.10713
+rotates = false
+script = ExtResource("2_oow5f")
+
+[node name="Miniboss" type="Node2D" parent="BossPath/BossPathFollow"]
+position = Vector2(0.00012207, -2.23602)
+rotation = -1.10713
+
+[node name="MinibossPivot" type="Node2D" parent="BossPath/BossPathFollow/Miniboss"]
 script = ExtResource("2_chbd2")
 
-[node name="StdEnemy2" parent="Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
+[node name="StdEnemy2" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
 position = Vector2(0, 80)
 
-[node name="StdEnemy3" parent="Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
+[node name="StdEnemy3" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
 position = Vector2(-80, 0)
 rotation = 1.5708
 
-[node name="StdEnemy4" parent="Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
+[node name="StdEnemy4" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
 position = Vector2(0, -80)
 rotation = -3.14159
 
-[node name="StdEnemy5" parent="Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
+[node name="StdEnemy5" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
 position = Vector2(80, 0)
 rotation = -1.5708
 
-[node name="StdEnemy" parent="Miniboss" instance=ExtResource("2_k1c5k")]
+[node name="StdEnemy" parent="BossPath/BossPathFollow/Miniboss" instance=ExtResource("2_k1c5k")]

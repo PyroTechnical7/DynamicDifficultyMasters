@@ -10,7 +10,7 @@ signal lowerSpeed(newSpeed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	playerHitSignal= get_node("playerHit")
+	playerHitSignal= get_node("initialEnemy")
 	#playerHitSignal.connect(_player_hit())
 	
 func _player_hit():

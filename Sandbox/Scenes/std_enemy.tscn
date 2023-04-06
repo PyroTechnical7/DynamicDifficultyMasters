@@ -33,6 +33,7 @@ func friendly_shot():
 	health+= -1
 	if(health <= 0 ):
 		queue_free()
+		destroyed.emit()
 	
 "
 
