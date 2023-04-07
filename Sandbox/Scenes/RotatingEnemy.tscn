@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3m0sb0nc0hxm"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Enemies/RotatingEnemy.gd" id="1_d0mhb"]
+[ext_resource type="Script" path="res://Scenes/RotatingEnemyHitbox.gd" id="2_bbpdb"]
+
+[sub_resource type="GDScript" id="GDScript_6bnhl"]
+script/source = "extends Node2D
+var bullet_scene = load(\"res://Scenes/EnemyBullet.tscn\") 
+var shooter
+var timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	shooter = get_parent()
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+	
+
+
+func _on_timer_timeout():
+	var bullet_instance = bullet_scene.instantiate()
+	get_tree().root.add_child(bullet_instance)
+	bullet_instance.global_position = global_position
+	bullet_instance.global_rotation = global_rotation - PI/2
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4ufp"]
+
+[node name="StdEnemy" type="Area2D"]
+script = ExtResource("1_d0mhb")
+ROTATION_SPEED = 1
+
+[node name="EnemyBulletSpawner2" type="Node2D" parent="."]
+position = Vector2(-35, 35)
+rotation = 3.92699
+script = SubResource("GDScript_6bnhl")
+
+[node name="EnemyBulletSpawner" type="Node2D" parent="."]
+position = Vector2(35, 35)
+rotation = 2.35619
+script = SubResource("GDScript_6bnhl")
+
+[node name="EnemyBulletSpawner3" type="Node2D" parent="."]
+position = Vector2(35, -35)
+rotation = 0.785398
+script = SubResource("GDScript_6bnhl")
+
+[node name="EnemyBulletSpawner4" type="Node2D" parent="."]
+position = Vector2(-35, -35)
+rotation = -0.785398
+script = SubResource("GDScript_6bnhl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_n4ufp")
+script = ExtResource("2_bbpdb")
+
+[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[connection signal="timeout" from="Timer" to="EnemyBulletSpawner2" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="EnemyBulletSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="EnemyBulletSpawner3" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="EnemyBulletSpawner4" method="_on_timer_timeout"]

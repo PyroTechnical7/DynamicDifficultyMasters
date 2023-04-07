@@ -1,6 +1,6 @@
 extends Node2D
 
-var bullet_scene = load("res://FriendlyBullet.tscn") 
+var bullet_scene = load("res://Scenes/FriendlyBullet.tscn") 
 var shooter
 
 

@@ -1,5 +1,5 @@
 extends Area2D
-var bullet_scene = load("res://FriendlyBullet.tscn") 
+var bullet_scene = load("res://Scenes/FriendlyBullet.tscn") 
 
 
 # Called when the node enters the scene tree for the first time.
