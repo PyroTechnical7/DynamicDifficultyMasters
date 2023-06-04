@@ -4,7 +4,7 @@
 script/source = "extends Area2D
 var bullet_scene = load(\"res://Scenes/FriendlyBullet.tscn\") 
 @export
-var interval = 1
+var interval:float = 1
 signal destroyed
 var DifficultyHandler
 @export
@@ -24,10 +24,6 @@ func _process(delta):
 			
 func setSpeedLow():
 	get_node(\"EnemyBulletSpawner\").SPEED = 2
-
-
-func _on_std_enemy_destroyed():
-	interval = 1 # Replace with function body.
 	
 func friendly_shot():
 	health+= -1

@@ -42,7 +42,6 @@ polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
 [node name="initialEnemy" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(617, 360)
 rotation = 1.5708
-interval = 2
 
 [node name="StdEnemy2" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(740, 704)
@@ -73,7 +72,6 @@ polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
 [node name="StdEnemy4" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(741, 540)
 rotation = -1.57079
-interval = 2
 
 [node name="StdEnemy5" parent="." instance=ExtResource("2_qo33u")]
 position = Vector2(740, 385)
