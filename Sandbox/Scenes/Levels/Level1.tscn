@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://drba1fp51nka4"]
+[gd_scene load_steps=8 format=3 uid="uid://drba1fp51nka4"]
 
 [ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_1q5nh"]
+[ext_resource type="Script" path="res://Scenes/Levels/wall.gd" id="2_h08r8"]
 [ext_resource type="PackedScene" uid="uid://cqtiv7k47dwny" path="res://Scenes/std_enemy.tscn" id="2_qo33u"]
 [ext_resource type="Script" path="res://Scripts/Entities/Objectives/GoalHitbox.gd" id="3_gel6q"]
 [ext_resource type="Script" path="res://Scenes/Levels/Goal.gd" id="3_moqhp"]
@@ -21,6 +22,7 @@ position = Vector2(193, 962)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(375, 765)
+script = ExtResource("2_h08r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 scale = Vector2(2.06881, 2.99152)
@@ -31,6 +33,7 @@ polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(678, 315)
+script = ExtResource("2_h08r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 scale = Vector2(2.06881, 2.99152)
@@ -49,6 +52,7 @@ rotation = -1.57079
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(678, 526)
+script = ExtResource("2_h08r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 scale = Vector2(2.06881, 2.99152)
@@ -58,9 +62,10 @@ shape = SubResource("RectangleShape2D_7jt26")
 polygon = PackedVector2Array(-31, 315, -31, -316, 31, -316, 31, 315)
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
-position = Vector2(760, 815)
+position = Vector2(748, 816)
 rotation = -1.57079
-scale = Vector2(0.811367, 0.320375)
+scale = Vector2(0.81, 0.32)
+script = ExtResource("2_h08r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
 scale = Vector2(2.06881, 2.99152)

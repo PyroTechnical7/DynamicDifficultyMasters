@@ -21,6 +21,12 @@ polygon = PackedVector2Array(0, -7, -5, 4, 0, 1, 5, 4)
 position = Vector2(0, -9)
 script = ExtResource("3_m2g3p")
 
+[node name="bullet_cooldown" type="Timer" parent="CharacterBody2D/BulletSpawner"]
+wait_time = 0.3
+one_shot = true
+
 [node name="CollisionBox" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_hix0q")
+
+[connection signal="timeout" from="CharacterBody2D/BulletSpawner/bullet_cooldown" to="CharacterBody2D/BulletSpawner" method="_on_bullet_cooldown_timeout"]

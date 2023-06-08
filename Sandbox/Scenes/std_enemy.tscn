@@ -9,21 +9,25 @@ signal destroyed
 var DifficultyHandler
 @export
 var health = 5
-
+var timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DifficultyHandler = get_node(\"DifficultyHandler\")
+	timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
+	DifficultyHandler = get_tree().root.get_node(\"World/DifficultyHandler\")
 	#DifficultyHandler.lowerSpeed.connect(setSpeedLow)
+	timer.wait_time = interval
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
-	timer.wait_time = interval
+	pass
 		
 			
-func setSpeedLow():
-	get_node(\"EnemyBulletSpawner\").SPEED = 2
+func setSpeedLow(speed):
+	timer.stop()
+	timer.wait_time = speed
+	timer.start()
+	print(\"speed changed\")
 	
 func friendly_shot():
 	health+= -1
@@ -55,6 +59,7 @@ func _process(delta):
 func _on_timer_timeout():
 	var bullet_instance = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet_instance)
+	
 	bullet_instance.global_position = global_position
 	bullet_instance.global_rotation = global_rotation - PI/2
 "

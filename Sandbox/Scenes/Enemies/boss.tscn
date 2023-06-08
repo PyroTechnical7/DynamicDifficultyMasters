@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://b43od3yyrhw8s"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/boss.gd" id="1_awa2r"]
+[ext_resource type="Script" path="res://Scenes/Enemies/boss_bullet_spawner.gd" id="2_sq6p8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxj4m"]
+
+[node name="Boss" type="CharacterBody2D"]
+scale = Vector2(10, 10)
+script = ExtResource("1_awa2r")
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(4.24683e-07, 0.254546)
+scale = Vector2(1.12, 1.13636)
+polygon = PackedVector2Array(0, -7, -5, 4, 0, 1, 5, 4)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -7, -5, 4, 0, 1, 5, 4)
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_yxj4m")
+
+[node name="BulletSpawner" type="Node2D" parent="."]
+position = Vector2(0, -9)
+script = ExtResource("2_sq6p8")
+
+[node name="bullet_cooldown" type="Timer" parent="BulletSpawner"]
+wait_time = 0.8
+one_shot = true
+
+[node name="BulletSpawner2" type="Node2D" parent="."]
+position = Vector2(-2, -8)
+rotation = -0.523599
+script = ExtResource("2_sq6p8")
+
+[node name="bullet_cooldown" type="Timer" parent="BulletSpawner2"]
+wait_time = 0.3
+one_shot = true
+
+[node name="BulletSpawner3" type="Node2D" parent="."]
+position = Vector2(2, -8)
+rotation = 0.523599
+script = ExtResource("2_sq6p8")
+
+[node name="bullet_cooldown" type="Timer" parent="BulletSpawner3"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner" method="_on_bullet_cooldown_timeout"]
+[connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner2" method="_on_bullet_cooldown_timeout"]
+[connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner3" method="_on_bullet_cooldown_timeout"]

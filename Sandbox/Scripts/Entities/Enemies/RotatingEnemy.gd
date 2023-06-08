@@ -8,6 +8,8 @@ var collidable = false
 @export
 var interval:float = 1
 
+signal destroyed
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,4 +23,5 @@ func _process(delta):
 	rotation += ROTATION_SPEED * delta
 
 func friendly_shot():
+	destroyed.emit()
 	queue_free()

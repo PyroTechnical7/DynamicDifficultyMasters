@@ -5,6 +5,12 @@ const SPEED = 500.0
 var rotation_point
 var angle = 0
 var rotating = false
+var health = 5
+var alive = true
+var DifficultyHandler
+
+func _ready():
+	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
 
 
 func get_input():
@@ -27,23 +33,35 @@ func get_input():
 
 
 func _physics_process(delta):
-	get_input()
+	if(alive):
+		get_input()
 
-	if (rotating):
-		var radius = global_position.distance_to(rotation_point)
-		var rotation_speed =   5
-		angle += -rotation_speed * delta
+		if (rotating):
+			var radius = global_position.distance_to(rotation_point)
+			var rotation_speed =   5
+			angle += -rotation_speed * delta
+			
+			var offset = Vector2(sin(angle), -cos(angle)) * radius
+			var pos = rotation_point + offset
+			
+			pos = pos - global_position
+			
+			if (move_and_collide(pos)): rotating = false
 		
-		var offset = Vector2(sin(angle), -cos(angle)) * radius
-		var pos = rotation_point + offset
+		else :
+			move_and_slide()
 		
-		pos = pos - global_position
-		
-		if (move_and_collide(pos)): rotating = false
+func enemy_shot():
+	damage()
+	if(DifficultyHandler.has_method("_player_hit")):
+		DifficultyHandler._player_hit()
 	
-	else :
-		move_and_slide()
-		
+func damage():
+	health = health - 1
+	if(health <= 0):
+		kill()
 
-		
+func kill():
+	alive = false
+	queue_free()
 

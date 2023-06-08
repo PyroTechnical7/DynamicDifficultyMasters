@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci55j7tkkouoe"]
+[gd_scene load_steps=8 format=3 uid="uid://ci55j7tkkouoe"]
 
 [ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_6ul38"]
 [ext_resource type="Script" path="res://Scenes/Levels/MinibossPivot.gd" id="2_chbd2"]
 [ext_resource type="Script" path="res://Scenes/Levels/BossPathFollow.gd" id="2_oow5f"]
 [ext_resource type="PackedScene" uid="uid://cqtiv7k47dwny" path="res://Scenes/std_enemy.tscn" id="3_egb2m"]
 [ext_resource type="Script" path="res://Scenes/std_enemy_miniboss.gd" id="5_0po03"]
+[ext_resource type="Script" path="res://Scenes/Levels/goal3.gd" id="6_b5ljy"]
 
 [sub_resource type="Curve2D" id="Curve2D_jw6nf"]
 _data = {
@@ -35,24 +36,27 @@ rotation = -1.10713
 script = ExtResource("2_chbd2")
 
 [node name="StdEnemy2" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
-position = Vector2(0, 80)
+position = Vector2(0, 100)
 interval = 0.15
 
 [node name="StdEnemy3" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
-position = Vector2(-80, 0)
+position = Vector2(-100, 0)
 rotation = 1.5708
 interval = 0.15
 
 [node name="StdEnemy4" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
-position = Vector2(0, -80)
+position = Vector2(0, -100)
 rotation = -3.14159
 interval = 0.15
 
 [node name="StdEnemy5" parent="BossPath/BossPathFollow/Miniboss/MinibossPivot" instance=ExtResource("3_egb2m")]
-position = Vector2(80, 0)
+position = Vector2(100, 0)
 rotation = -1.5708
 interval = 0.15
 
 [node name="StdEnemy" parent="BossPath/BossPathFollow/Miniboss" node_paths=PackedStringArray("player") instance=ExtResource("3_egb2m")]
 script = ExtResource("5_0po03")
 player = NodePath("../../../../Player")
+
+[node name="Goal" type="Node" parent="."]
+script = ExtResource("6_b5ljy")

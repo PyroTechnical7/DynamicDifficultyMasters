@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bokap2i6f2qxy"]
+[gd_scene load_steps=7 format=3 uid="uid://bokap2i6f2qxy"]
 
 [ext_resource type="PackedScene" uid="uid://geipsrlf8pp" path="res://Scenes/Player.tscn" id="1_jaeb2"]
 [ext_resource type="Script" path="res://Scripts/Entities/Enemies/Paths/RectangularRotation.gd" id="2_jejem"]
 [ext_resource type="PackedScene" uid="uid://b3m0sb0nc0hxm" path="res://Scenes/RotatingEnemy.tscn" id="3_8f1p8"]
+[ext_resource type="Script" path="res://Scenes/Levels/goal2.gd" id="4_e4odo"]
 
 [sub_resource type="Curve2D" id="Curve2D_r3osx"]
 _data = {
@@ -66,3 +67,6 @@ rotation = 3.14159
 progress = 2688.7
 rotates = false
 script = ExtResource("2_jejem")
+
+[node name="Goal" type="Node" parent="."]
+script = ExtResource("4_e4odo")
