@@ -15,8 +15,8 @@ var timer
 func _ready():
 	timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
 	DifficultyHandler = get_tree().root.get_node(\"World/DifficultyHandler\")
-	#DifficultyHandler.lowerSpeed.connect(setSpeedLow)
-	timer.wait_time = interval
+	DifficultyHandler.lowerSpeed.connect(setSpeedLow)
+	timer.wait_time = DifficultyHandler.interval
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

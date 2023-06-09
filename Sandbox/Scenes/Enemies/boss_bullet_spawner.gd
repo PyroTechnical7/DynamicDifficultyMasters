@@ -5,7 +5,7 @@ var bullet_cooldown
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bullet_cooldown = get_node("bullet_cooldown") # Replace with function body.
+	bullet_cooldown = get_node("bullet_cooldown")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

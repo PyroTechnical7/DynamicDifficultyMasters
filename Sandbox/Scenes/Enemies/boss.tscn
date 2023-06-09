@@ -49,5 +49,5 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner" method="_on_bullet_cooldown_timeout"]
-[connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner2" method="_on_bullet_cooldown_timeout"]
-[connection signal="timeout" from="BulletSpawner/bullet_cooldown" to="BulletSpawner3" method="_on_bullet_cooldown_timeout"]
+[connection signal="timeout" from="BulletSpawner2/bullet_cooldown" to="BulletSpawner2" method="_on_bullet_cooldown_timeout"]
+[connection signal="timeout" from="BulletSpawner3/bullet_cooldown" to="BulletSpawner3" method="_on_bullet_cooldown_timeout"]

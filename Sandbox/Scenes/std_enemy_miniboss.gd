@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	player = get_node("/root/level3/Player/CharacterBody2D") as Node2D
+	player = get_parent().get_parent().get_parent().get_parent().get_node("Player/CharacterBody2D")
 	if(player != null):
 		look_at(player.global_position)
 	rotation = rotation - 0.5*PI

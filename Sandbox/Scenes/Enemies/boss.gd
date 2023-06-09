@@ -5,20 +5,27 @@ const SPEED = 500.0
 var rotation_point
 var angle = 0
 var player
-@export
-var interval:float = 1
+var interval
 var cooled = true
+var health = 10
+var DifficultyHandler
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
+	interval = DifficultyHandler.interval
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	interval = DifficultyHandler.interval
+	get_node("BulletSpawner2").bullet_cooldown.wait_time = interval
+	get_node("BulletSpawner3").bullet_cooldown.wait_time = interval
 	match(mode):
 		"mirror":
 			get_input()
+			get_node("BulletSpawner2").set_process(false)
+			get_node("BulletSpawner3").set_process(false)
 			if (rotating):
 				var radius = global_position.distance_to(rotation_point)
 				var rotation_speed =   5
@@ -33,10 +40,27 @@ func _process(delta):
 			
 			else :
 				move_and_slide()
+		"extremeMirror":
+			get_input()
+			get_node("BulletSpawner2").set_process(true)
+			get_node("BulletSpawner3").set_process(true)
+			if (rotating):
+				var radius = global_position.distance_to(rotation_point)
+				var rotation_speed =   5
+				angle += -rotation_speed * delta
+				
+				var offset = Vector2(sin(angle), -cos(angle)) * radius
+				var pos = rotation_point + offset
+				
+				pos = pos - global_position
+				
+				if (move_and_collide(pos)): rotating = false
+			else:
+				move_and_slide()
 				
 
 func get_input():
-	player = get_node("/root/boss_level/Player/CharacterBody2D") as Node2D
+	player = get_parent().get_node("Player/CharacterBody2D")
 	if(player != null):
 		look_at(player.global_position)
 	rotation = rotation + PI/2
@@ -54,4 +78,6 @@ func get_input():
 		rotating = false
 
 func friendly_shot():
-	queue_free()
+		health -= 1
+		if health <= 5: mode = "extremeMirror"
+		if health <= 0: queue_free()
