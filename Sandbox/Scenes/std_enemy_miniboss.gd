@@ -8,6 +8,8 @@ signal destroyed
 var DifficultyHandler
 @export
 var health = 5
+var body
+var startingHealth
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +18,8 @@ func _ready():
 	#DifficultyHandler.lowerSpeed.connect(setSpeedLow)
 	var timer = get_node("EnemyBulletSpawner/Timer") as Timer
 	timer.wait_time = interval
+	startingHealth = health
+	body = get_node("body2")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,6 +36,7 @@ func setSpeedLow():
 	
 func friendly_shot():
 	health+= -1
+	body.scale = Vector2( 1, float(startingHealth-health)/startingHealth)
 	if(health <= 0 ):
 		queue_free()
 		destroyed.emit()

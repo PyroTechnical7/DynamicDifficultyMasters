@@ -14,6 +14,7 @@ _data = {
 point_count = 5
 
 [node name="level3" type="Node2D"]
+scale = Vector2(1.0009, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_6ul38")]
 position = Vector2(156, 534)
@@ -57,6 +58,7 @@ interval = 0.15
 [node name="StdEnemy" parent="BossPath/BossPathFollow/Miniboss" node_paths=PackedStringArray("player") instance=ExtResource("3_egb2m")]
 script = ExtResource("5_0po03")
 player = NodePath("../../../../Player")
+health = 5
 
 [node name="Goal" type="Node" parent="."]
 script = ExtResource("6_b5ljy")

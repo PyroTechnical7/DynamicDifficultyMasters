@@ -8,15 +8,19 @@ var interval:float = 1
 signal destroyed
 var DifficultyHandler
 @export
-var health = 5
+var health = 2
 var timer
+var startingHealth
+var body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
 	DifficultyHandler = get_tree().root.get_node(\"World/DifficultyHandler\")
+	body = get_node(\"body2\")
 	DifficultyHandler.lowerSpeed.connect(setSpeedLow)
 	timer.wait_time = DifficultyHandler.interval
+	startingHealth = health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,9 +35,12 @@ func setSpeedLow(speed):
 	
 func friendly_shot():
 	health+= -1
+	body.scale = Vector2(1, float(startingHealth - health)/startingHealth)
 	if(health <= 0 ):
 		queue_free()
-		destroyed.emit()
+		if(DifficultyHandler.has_method(\"enemy_killed\")):
+			DifficultyHandler.enemy_killed()
+	
 	
 "
 
@@ -71,10 +78,16 @@ script = SubResource("GDScript_fyewp")
 position = Vector2(-30, -30)
 polygon = PackedVector2Array(0, 0, 30, 63, 60, 0)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="body" type="Polygon2D" parent="."]
 position = Vector2(-30, -30)
 color = Color(0.635294, 0, 0, 1)
-polygon = PackedVector2Array(60, 0, 30, 64, 0, 0)
+polygon = PackedVector2Array(60, 0, 30, 64, 0, 0, 30, 0)
+
+[node name="body2" type="Polygon2D" parent="."]
+position = Vector2(-30, -30)
+scale = Vector2(1, 1e-05)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(60, 0, 30, 64, 0, 0, 30, 0)
 
 [node name="EnemyBulletSpawner" type="Node2D" parent="."]
 position = Vector2(0, 45)

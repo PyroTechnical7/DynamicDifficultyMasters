@@ -60,8 +60,13 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_n4ufp")
 script = ExtResource("2_bbpdb")
 
-[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D"]
+[node name="Body2" type="Polygon2D" parent="CollisionShape2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Body" type="Polygon2D" parent="CollisionShape2D"]
 color = Color(1, 0, 0, 1)
+texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
 [node name="Timer" type="Timer" parent="."]

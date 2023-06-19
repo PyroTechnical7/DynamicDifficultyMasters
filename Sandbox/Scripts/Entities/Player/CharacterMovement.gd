@@ -5,13 +5,16 @@ const SPEED = 500.0
 var rotation_point
 var angle = 0
 var rotating = false
-var health = 5
+var health = 10
 var alive = true
 var DifficultyHandler
+var body
+var startingHealth
 
 func _ready():
 	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
-
+	body = get_node("body")
+	startingHealth = health
 
 func get_input():
 	look_at(get_global_mouse_position())
@@ -58,10 +61,14 @@ func enemy_shot():
 	
 func damage():
 	health = health - 1
+	body.scale = Vector2( float(health)/startingHealth, float(health)/startingHealth)
 	if(health <= 0):
 		kill()
 
 func kill():
 	alive = false
-	queue_free()
+	if(DifficultyHandler.has_method("player_killed")):
+		DifficultyHandler.player_killed()
+	get_tree().reload_current_scene()
+	get_tree().call_group("bullets", "queue_free")
 
