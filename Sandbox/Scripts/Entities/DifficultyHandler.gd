@@ -24,8 +24,6 @@ func _process(delta):
 func level_cleared(time_taken):
 	clear_times.append_array(time_taken)
 	
-	pass
-	
 func _player_hit():
 	timesHit += 1
 	skillScore -= 10
@@ -53,3 +51,8 @@ func check_score():
 	elif skillScore <= 100 :
 		#emit_signal("lowerSpeed", 1)
 		interval = 1
+
+func get_times():
+	var text
+	for i in clear_times:
+		text += i + "\n"

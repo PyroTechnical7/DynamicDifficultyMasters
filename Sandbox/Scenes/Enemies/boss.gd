@@ -11,6 +11,7 @@ var health = 10
 var DifficultyHandler
 var body
 var startingHealth
+var start_time
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 	interval = DifficultyHandler.interval
 	body = get_node("body")
 	startingHealth = health
+	start_time = Time.get_unix_time_from_system()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,4 +87,12 @@ func friendly_shot():
 		health -= 1
 		body.scale = Vector2( float(health)/startingHealth, float(health)/startingHealth)
 		if health <= 5: mode = "extremeMirror"
-		if health <= 0: queue_free()
+		if health <= 0: win()
+		
+func win():
+	queue_free()
+	get_parent().get_node("Player/CharacterBody2D").alive = false
+	get_parent().get_node("WinScreen").finish()
+	var time_taken = Time.get_unix_time_from_system() - start_time
+	if(DifficultyHandler.has_method("level_cleared")):
+		DifficultyHandler.level_cleared([time_taken])
