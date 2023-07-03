@@ -21,6 +21,10 @@ func _ready():
 	enemy1.destroyed.connect(progress_level)
 	enemy2.destroyed.connect(progress_level)
 	
+	DifficultyHandler.currentLevel = get_parent()
+	
+	DifficultyHandler.currentLevelResource = load("res://Scenes/Levels/level2.tscn")
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,12 +32,13 @@ func _process(delta):
 	
 func progress_level():
 	enemies_defeated += 1
-	if(enemies_defeated == 2): loadNextLevel()
+	if(enemies_defeated == 2): complete_level()
 		
 func loadNextLevel():
 	var current_level = get_parent()
 	var world = current_level.get_parent()
 	var bullets = get_tree().get_nodes_in_group("bullets")
+	DifficultyHandler.currentLevel = current_level
 	get_tree().call_group("bullets", "queue_free")
 	world.remove_child(current_level)
 	world.add_child(next_level_resource.instantiate())

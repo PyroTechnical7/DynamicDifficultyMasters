@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://geipsrlf8pp"]
+[gd_scene load_steps=6 format=3 uid="uid://geipsrlf8pp"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/CharacterMovement.gd" id="1_6jimt"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/Player.gd" id="1_hr5qu"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/BulletSpawner.gd" id="3_m2g3p"]
+[ext_resource type="Script" path="res://Scenes/LivesCounter.gd" id="4_a8kg3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hix0q"]
 
@@ -33,4 +34,18 @@ one_shot = true
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_hix0q")
 
+[node name="LivesCounter" type="Label" parent="."]
+offset_left = -19.0
+offset_top = 64.0
+offset_right = 21.0
+offset_bottom = 90.0
+text = "3"
+script = ExtResource("4_a8kg3")
+
+[node name="Timer" type="Timer" parent="LivesCounter"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="CharacterBody2D/BulletSpawner/bullet_cooldown" to="CharacterBody2D/BulletSpawner" method="_on_bullet_cooldown_timeout"]
+[connection signal="timeout" from="LivesCounter/Timer" to="LivesCounter" method="_on_timer_timeout"]

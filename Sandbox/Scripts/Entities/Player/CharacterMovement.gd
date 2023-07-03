@@ -5,7 +5,7 @@ const SPEED = 500.0
 var rotation_point
 var angle = 0
 var rotating = false
-var health = 10
+var health = 3
 var alive = true
 var DifficultyHandler
 var body
@@ -67,8 +67,9 @@ func damage():
 
 func kill():
 	alive = false
+		
 	if(DifficultyHandler.has_method("player_killed")):
 		DifficultyHandler.player_killed()
-	get_tree().reload_current_scene()
-	get_tree().call_group("bullets", "queue_free")
+		
+	
 

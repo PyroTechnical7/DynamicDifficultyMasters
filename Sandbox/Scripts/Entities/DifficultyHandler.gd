@@ -9,20 +9,26 @@ var clear_times: Array
 var interval
 var timesKilled = 0
 var skillScore = 100
-var currentLevel = 1
+var currentLevel :Node2D
+var currentLevelResource
+var lives = 3
 
 signal lowerSpeed(newSpeed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	interval = 1
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func level_cleared(time_taken):
-	clear_times.append_array(time_taken)
+	if (clear_times == null):
+		clear_times = [time_taken]
+	else:
+		clear_times.append_array(time_taken)
 	
 func _player_hit():
 	timesHit += 1
@@ -34,6 +40,14 @@ func player_killed():
 	timesKilled += 1
 	skillScore -= 10
 	check_score()
+	if(lives > 0):
+		lives = lives - 1
+		get_parent().remove_child(currentLevel)
+		get_parent().add_child(currentLevelResource.instantiate())
+		get_tree().call_group("bullets", "queue_free")
+	else:
+		get_tree().reload_current_scene()
+		get_tree().call_group("bullets", "queue_free")
 	
 func enemy_killed():
 	enemiesKilled += 1
@@ -55,4 +69,10 @@ func check_score():
 func get_times():
 	var text
 	for i in clear_times:
-		text += i + "\n"
+		i = snapped(i, 0.001)
+		if(text == null):
+			text = str(i, "\n")
+		else:
+			text = str(text, i, "\n")
+		
+	return text

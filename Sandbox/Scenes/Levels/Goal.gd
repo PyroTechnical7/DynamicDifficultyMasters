@@ -12,7 +12,8 @@ var next_level_resource = load("res://Scenes/Levels/level2.tscn")
 func _ready():
 	start_time = Time.get_unix_time_from_system()
 	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
-
+	DifficultyHandler.currentLevel = get_parent()
+	DifficultyHandler.currentLevelResource = load("res://Scenes/Levels/Level1.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

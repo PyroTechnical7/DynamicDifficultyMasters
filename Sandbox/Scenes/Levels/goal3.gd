@@ -16,13 +16,17 @@ func _ready():
 	
 	miniboss.destroyed.connect(progress_level)
 	
+	DifficultyHandler.currentLevel = get_parent()
+	DifficultyHandler.currentLevelScene = load("res://Scenes/Levels/level3.tscn")
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
 func progress_level():
-	loadNextLevel()
+	complete_level()
 		
 func loadNextLevel():
 	var current_level = get_parent()

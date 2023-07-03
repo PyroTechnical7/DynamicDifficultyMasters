@@ -20,6 +20,9 @@ func _ready():
 	body = get_node("body")
 	startingHealth = health
 	start_time = Time.get_unix_time_from_system()
+	DifficultyHandler.currentLevel = get_parent()
+	DifficultyHandler.currentLevelScene = load("res://Scenes/Levels/boss_level.tscn")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,8 +94,8 @@ func friendly_shot():
 		
 func win():
 	queue_free()
-	get_parent().get_node("Player/CharacterBody2D").alive = false
-	get_parent().get_node("WinScreen").finish()
 	var time_taken = Time.get_unix_time_from_system() - start_time
 	if(DifficultyHandler.has_method("level_cleared")):
 		DifficultyHandler.level_cleared([time_taken])
+	get_parent().get_node("Player/CharacterBody2D").alive = false
+	get_parent().get_node("WinScreen").finish()
