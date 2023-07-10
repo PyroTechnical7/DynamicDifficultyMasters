@@ -1,6 +1,6 @@
 extends Node2D
 @export
-var SPEED = 5
+var SPEED = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += Vector2(SPEED,0).rotated(rotation)
+	position += Vector2(SPEED*delta,0).rotated(rotation)
 	
 	# Unrender if offscreen
 	if(global_position.x < -5 || global_position.y < -5 || global_position.x > 2000 || global_position.y > 1250) :

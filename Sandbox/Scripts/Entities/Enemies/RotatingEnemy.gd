@@ -18,8 +18,10 @@ signal destroyed
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var timer = get_node("Timer") as Timer
-	timer.wait_time = interval
+	
 	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
+	interval = DifficultyHandler.interval * 2
+	timer.wait_time = interval
 	body = get_node("CollisionShape2D/Body") as Node2D
 	startingHealth = health
 

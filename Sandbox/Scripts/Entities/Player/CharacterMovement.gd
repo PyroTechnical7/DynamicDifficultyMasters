@@ -14,7 +14,8 @@ var startingHealth
 func _ready():
 	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
 	body = get_node("body")
-	startingHealth = health
+	startingHealth = DifficultyHandler.max_health
+	health = startingHealth
 
 func get_input():
 	look_at(get_global_mouse_position())

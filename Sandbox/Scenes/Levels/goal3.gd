@@ -17,7 +17,7 @@ func _ready():
 	miniboss.destroyed.connect(progress_level)
 	
 	DifficultyHandler.currentLevel = get_parent()
-	DifficultyHandler.currentLevelScene = load("res://Scenes/Levels/level3.tscn")
+	DifficultyHandler.currentLevelResource = load("res://Scenes/Levels/level3.tscn")
 	
 	
 

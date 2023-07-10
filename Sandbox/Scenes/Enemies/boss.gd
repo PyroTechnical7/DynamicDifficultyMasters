@@ -21,7 +21,7 @@ func _ready():
 	startingHealth = health
 	start_time = Time.get_unix_time_from_system()
 	DifficultyHandler.currentLevel = get_parent()
-	DifficultyHandler.currentLevelScene = load("res://Scenes/Levels/boss_level.tscn")
+	DifficultyHandler.currentLevelResource = load("res://Scenes/Levels/boss_level.tscn")
 	
 
 
@@ -98,4 +98,5 @@ func win():
 	if(DifficultyHandler.has_method("level_cleared")):
 		DifficultyHandler.level_cleared([time_taken])
 	get_parent().get_node("Player/CharacterBody2D").alive = false
+	get_tree().call_group("bullets", "queue_free")
 	get_parent().get_node("WinScreen").finish()

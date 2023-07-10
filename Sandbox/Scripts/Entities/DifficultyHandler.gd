@@ -8,17 +8,25 @@ var playerHitSignal
 var clear_times: Array
 var interval
 var timesKilled = 0
-var skillScore = 100
+var skillScore = 80
 var currentLevel :Node2D
 var currentLevelResource
+var level_1
 var lives = 3
+var start_time
+var file
+var max_health
+var dd_enabled = true
 
 signal lowerSpeed(newSpeed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	interval = 1
-	
+	interval = 2
+	max_health = 3
+	start_time = Time.get_unix_time_from_system()
+	file = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
+	level_1 = load("res://Scenes/Levels/Level1.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -29,12 +37,15 @@ func level_cleared(time_taken):
 		clear_times = [time_taken]
 	else:
 		clear_times.append_array(time_taken)
+		
+	file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Level cleared\n")
+	file.store_string(str("Skill score:" + str(skillScore) + "\n"))
 	
 func _player_hit():
 	timesHit += 1
 	skillScore -= 10
-	print("player hit")
 	check_score()
+	file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Player hit\n")
 		
 func player_killed():
 	timesKilled += 1
@@ -45,8 +56,13 @@ func player_killed():
 		get_parent().remove_child(currentLevel)
 		get_parent().add_child(currentLevelResource.instantiate())
 		get_tree().call_group("bullets", "queue_free")
+		file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Player died\n")
 	else:
-		get_tree().reload_current_scene()
+		file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Game over\n")
+		get_parent().remove_child(currentLevel)
+		lives = 3
+		clear_times = []
+		get_parent().add_child(level_1.instantiate())
 		get_tree().call_group("bullets", "queue_free")
 	
 func enemy_killed():
@@ -54,17 +70,24 @@ func enemy_killed():
 	skillScore += 10
 	check_score()
 	
+	file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Enemy defeated\n")
+	
 func check_score():
-	if skillScore < 80 :
+	if skillScore < 30 :
 		#emit_signal("lowerSpeed", 4)
 		interval = 4
-	elif skillScore < 90 :
+		max_health = 5
+	elif skillScore <= 80 :
 		#emit_signal("lowerSpeed", 2)
 		interval = 2
+		max_health = 3
 		
-	elif skillScore <= 100 :
+	elif skillScore <= 110 :
 		#emit_signal("lowerSpeed", 1)
 		interval = 1
+		max_health = 3
+		
+	if(!dd_enabled): skillScore = 80
 
 func get_times():
 	var text
