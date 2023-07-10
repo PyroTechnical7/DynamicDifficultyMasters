@@ -38,7 +38,7 @@ func friendly_shot():
 		destory()
 		
 func destory():
-	queue_free()
-	destroyed.emit()
 	if(DifficultyHandler.has_method("enemy_killed")):
 			DifficultyHandler.enemy_killed()
+	queue_free()
+	destroyed.emit()

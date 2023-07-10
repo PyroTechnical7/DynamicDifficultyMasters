@@ -14,9 +14,10 @@ var startingHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DifficultyHandler = get_node("DifficultyHandler")
+	DifficultyHandler = get_tree().root.get_node("World/DifficultyHandler")
 	#DifficultyHandler.lowerSpeed.connect(setSpeedLow)
 	var timer = get_node("EnemyBulletSpawner/Timer") as Timer
+	health = DifficultyHandler.miniboss_health
 	timer.wait_time = interval
 	startingHealth = health
 	body = get_node("body2")

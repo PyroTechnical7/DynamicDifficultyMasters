@@ -17,6 +17,7 @@ var body
 func _ready():
 	timer = get_node(\"EnemyBulletSpawner/Timer\") as Timer
 	DifficultyHandler = get_tree().root.get_node(\"World/DifficultyHandler\")
+	health = DifficultyHandler.std_health
 	body = get_node(\"body2\")
 	DifficultyHandler.lowerSpeed.connect(setSpeedLow)
 	timer.wait_time = DifficultyHandler.interval
@@ -37,9 +38,10 @@ func friendly_shot():
 	health+= -1
 	body.scale = Vector2(1, float(startingHealth - health)/startingHealth)
 	if(health <= 0 ):
-		queue_free()
 		if(DifficultyHandler.has_method(\"enemy_killed\")):
 			DifficultyHandler.enemy_killed()
+		queue_free()
+		
 	
 	
 "

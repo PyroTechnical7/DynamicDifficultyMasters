@@ -16,12 +16,17 @@ var lives = 3
 var start_time
 var file
 var max_health
-var dd_enabled = true
+var dd_enabled = false
+var std_health
+var miniboss_health
+var pity_life = false
 
 signal lowerSpeed(newSpeed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	std_health = 2
+	miniboss_health = 5
 	interval = 2
 	max_health = 3
 	start_time = Time.get_unix_time_from_system()
@@ -38,6 +43,8 @@ func level_cleared(time_taken):
 	else:
 		clear_times.append_array(time_taken)
 		
+	if(pity_life): lives = lives + 1
+		
 	file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Level cleared\n")
 	file.store_string(str("Skill score:" + str(skillScore) + "\n"))
 	
@@ -50,6 +57,7 @@ func _player_hit():
 func player_killed():
 	timesKilled += 1
 	skillScore -= 10
+	file.store_string(str("Skill score:" + str(skillScore) + "\n"))
 	check_score()
 	if(lives > 0):
 		lives = lives - 1
@@ -73,21 +81,29 @@ func enemy_killed():
 	file.store_string(str(Time.get_unix_time_from_system() - start_time) + ": Enemy defeated\n")
 	
 func check_score():
+	if(!dd_enabled): return
 	if skillScore < 30 :
 		#emit_signal("lowerSpeed", 4)
 		interval = 4
 		max_health = 5
+		std_health = 1
+		miniboss_health = 3
+		pity_life = true
 	elif skillScore <= 80 :
 		#emit_signal("lowerSpeed", 2)
 		interval = 2
 		max_health = 3
+		std_health = 2
+		miniboss_health = 5
+		pity_life = false
 		
 	elif skillScore <= 110 :
 		#emit_signal("lowerSpeed", 1)
 		interval = 1
 		max_health = 3
+		std_health = 3
+		pity_life = false
 		
-	if(!dd_enabled): skillScore = 80
 
 func get_times():
 	var text
